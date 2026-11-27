@@ -194,7 +194,7 @@ const STATIONS=[
      /* [first day, last day] local JST; R1 carries the makuuchi division ~15:45–18:00 JST. Add later basho as the Sumo Association confirms them. */
      basho:[['2027-01-10','2027-01-24','Hatsu basho · Ryōgoku Kokugikan']],from:'15:45',to:'18:00'}}
 ];
-const SPORT_W={'Football':3,'Soccer':3,'Ice hockey':7,'Bandy':10,'Handball':8,'Floorball':9,'Biathlon':9,'Cross-country skiing':9,'Alpine skiing':7,'Aussie rules':8,'Rugby league':6,'Rugby union':5,'Rugby':5,'Sumo':10,'Basketball':4,'Speedway':9,'Harness racing':9,'Athletics':5,'Volleyball':6,'Sports talk':2};
+const SPORT_W={'Football':3,'Soccer':3,'Ice hockey':7,'Bandy':10,'Handball':8,'Floorball':9,'Biathlon':9,'Cross-country skiing':9,'Alpine skiing':7,'Aussie rules':8,'Rugby league':6,'Rugby union':5,'Rugby':5,'Sumo':10,'Basketball':4,'Speedway':9,'Harness racing':9,'Athletics':5,'Volleyball':6,'Sports talk':2,'Live sport':8};
 const ESPN_SPORT={'soccer':'Football','australian-football':'Aussie rules','rugby-league':'Rugby league','rugby':'Rugby union','hockey':'Ice hockey'};
 const LANG_B={English:-4,Spanish:0,Portuguese:0,French:0,German:0,Italian:0};
 function rarity(st,sport){const sw=st.sportW&&!sport?st.sportW:(SPORT_W[sport]??4);const lb=LANG_B[st.lang]??2;return sw+lb;}
@@ -230,7 +230,7 @@ async function pollTSDB(){
 }
 const SR_RE=/(fotboll|ishockey|hockey|bandy|handboll|innebandy|basket|skidskytte|längdskid|langdskid|alpint|friidrott|speedway|trav|volleyboll|radiosporten|sporten|\bsport|shl|allsvenskan|damallsvenskan|vm-|em-|världscup)/i;
 const SR_SPORT=[[/bandy/i,'Bandy'],[/hockey|shl/i,'Ice hockey'],[/innebandy/i,'Floorball'],[/handboll/i,'Handball'],[/skidskytte/i,'Biathlon'],[/längd|langd/i,'Cross-country skiing'],[/alpin/i,'Alpine skiing'],[/fotboll|allsvenskan/i,'Football'],[/speedway/i,'Speedway'],[/trav/i,'Harness racing'],[/basket/i,'Basketball'],[/friidrott/i,'Athletics']];
-const srSport=t=>{for(const[r,s]of SR_SPORT)if(r.test(t))return s;return 'Sports talk';};
+const srSport=t=>{for(const[r,s]of SR_SPORT)if(r.test(t))return s;return /sportextra|direktsänd|radiosporten/i.test(t)?'Live sport':'Sports talk';};
 const SR_LIVE1={132:'p1',701:'p4sth',210:'p4gavl',207:'p4malm',204:'p4vrml',215:'p4vbtn',203:'p4jkpg',212:'p4gbg',223:'p4dala',216:'p4vnrl',222:'p4ostg',220:'p4hall',201:'p4kalm'};
 const srTime=s=>{const m=/\d+/.exec(s||'');return m?new Date(+m[0]):null;};
 async function pollSR(){
@@ -252,7 +252,7 @@ function teamMatch(ev,teams){if(!teams)return true;const cs=ev.competitions?.[0]
 function evLine(ev){const cs=ev.competitions?.[0]?.competitors||[];const h=cs.find(c=>c.homeAway==='home')||cs[0],a=cs.find(c=>c.homeAway==='away')||cs[1];if(!h||!a)return{title:ev.name||'',score:''};return{title:`${h.team.shortDisplayName||h.team.displayName} v ${a.team.shortDisplayName||a.team.displayName}`,score:(h.score!=null&&a.score!=null)?`${h.score}–${a.score}`:''};}
 function sportFromPath(p,f){return f.sport||ESPN_SPORT[p.split('/')[0]]||'Football';}
 function resolve(){
-  const now=Date.now(), H=26*36e5;liveMap={};upcoming=[];
+  const now=Date.now(), H=26*36e5, H7=7*864e5;liveMap={};upcoming=[];const within=(t,sport)=>t-now<(sport==='Football'?H:H7);
   for(const st of STATIONS){
     if(st.sr)continue;
     const lives=[];
@@ -265,7 +265,7 @@ function resolve(){
           if(!teamMatch(ev,f.teams))continue;
           const state=ev.status?.type?.state, l=evLine(ev), sport=sportFromPath(f.espn,f);
           if(state==='in')lives.push({sport,league:c.league,...l,detail:ev.status?.type?.shortDetail||''});
-          else if(state==='pre'){const t=new Date(ev.date);if(t-now<H&&t>now-6e5)upcoming.push({t,st,sport,title:l.title,league:c.league});}
+          else if(state==='pre'){const t=new Date(ev.date);if(within(t,sport)&&t>now-6e5)upcoming.push({t,st,sport,title:l.title,league:c.league});}
         }
       }
       if(f.tsdb&&tsdbCache[f.tsdb.id]){
@@ -273,7 +273,7 @@ function resolve(){
           const t=new Date((ev.strTimestamp||'')+(/Z|\+/.test(ev.strTimestamp||'')?'':'Z'));if(isNaN(t))continue;
           const done=/^(FT|AOT|AP|AET|PEN|Match Finished|POST|CANC|PST)/i.test(ev.strStatus||'');
           if(!done&&t<=now&&now<t.getTime()+f.tsdb.dur*6e4)lives.push({sport:f.tsdb.sport,league:f.tsdb.league,title:`${ev.strHomeTeam} v ${ev.strAwayTeam}`,score:(ev.intHomeScore!=null&&ev.intAwayScore!=null)?`${ev.intHomeScore}–${ev.intAwayScore}`:'',detail:'live status estimated from start time',inferred:true});
-          else if(!done&&t>now&&t-now<H)upcoming.push({t,st,sport:f.tsdb.sport,title:`${ev.strHomeTeam} v ${ev.strAwayTeam}`,league:f.tsdb.league});
+          else if(!done&&t>now&&within(t,f.tsdb.sport))upcoming.push({t,st,sport:f.tsdb.sport,title:`${ev.strHomeTeam} v ${ev.strAwayTeam}`,league:f.tsdb.league});
         }
       }
     }
@@ -301,7 +301,7 @@ function resolve(){
     const end=srTime(x.ep.endtimeutc);
     liveMap[st.id]={live:true,sport,league:'Sveriges Radio',title:x.ep.title,score:'',detail:end?`until ${fmtT(end)}`:'',count:1};
   });
-  srNext.forEach(x=>{const t=srTime(x.ep.starttimeutc);if(t&&t-now<H)upcoming.push({t,st:{id:'sr'+x.ch.id,name:'Sveriges Radio '+x.ch.name,city:x.ch.name,flag:'🇸🇪',lang:'Swedish'},sport:srSport(x.ep.title),title:x.ep.title,league:'Sveriges Radio'});});
+  srAhead.forEach(x=>{if(x.t>now&&within(x.t,x.sport))upcoming.push({t:x.t,st:{id:'sr'+x.ch.id,name:'Sveriges Radio '+x.ch.name,city:x.ch.name,flag:'🇸🇪',lang:'Swedish'},sport:x.sport,title:x.sport==='Live sport'?'Sportextra · live Swedish sport, fixtures not listed':x.title,league:'Sveriges Radio'});});
   STATIONS.sort((a,b)=>a.pos-b.pos);
   // one row per fixture in Next up, listing every station carrying it
   const m=new Map();
@@ -358,9 +358,9 @@ function drawGuide(){
   if(!L.length)gl.innerHTML=`<div class="empty">No tracked games are on air right now.${upcoming[0]?` The next one is ${esc(upcoming[0].title)}, ${inWords(upcoming[0].t)}. Sports talk is playing until then.`:''}</div>`;
   L.forEach(s=>{const x=liveMap[s.id];gl.appendChild(item(s,'live',esc(x.score||'LIVE'),`${s.flag} ${esc(x.title)}`,`${esc(x.sport)} · ${esc(s.name)} · ${esc(s.lang)}${s.locked?' · only plays in Japan':''}${isDead(s)?' · no signal':''}`,()=>pick(s)));});
   talkList().forEach(s=>gt.appendChild(item(s,'talk',kHz(s),`${s.flag} ${esc(s.name)}`,`${esc(s.city)} · ${esc(s.lang)}${isDead(s)?' · no signal':''}`,()=>pick(s))));
-  const up=upcoming.slice(0,12);
+  const up=[...upcoming.filter(u=>u.sport!=='Football').slice(0,8),...upcoming.filter(u=>u.sport==='Football').slice(0,10)].sort((a,b)=>a.t-b.t);
   if(!up.length)gn.innerHTML='<div class="empty">Nothing scheduled on tracked stations in the next day.</div>';
-  up.forEach(u=>gn.appendChild(item(null,'next',inWords(u.t),`${u.sts[0].flag} ${esc(u.title)}`,`${fmtT(u.t)} · ${esc(u.sport)} · ${esc(u.sts.map(s=>s.name).join(', '))}`)));
+  up.forEach(u=>gn.appendChild(item(null,'next',inWords(u.t),`${u.sts[0].flag} ${esc(u.title)}`,`${fmtT(u.t)} · ${esc(u.sport)} · ${esc(u.sts.length>3?u.sts.slice(0,2).map(s=>s.name).join(', ')+` +${u.sts.length-2} more`:u.sts.map(s=>s.name).join(', '))}`)));
 }
 
 /* ============================================================ audio + static */
@@ -438,10 +438,26 @@ document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowD
 
 /* ============================================================ loop */
 let lastTSDB=0;
+let srAhead=[],lastSRAhead=0;
+const SR_SPORT_CH=[179,2383,2384,2385,2386,2387,2388,2389,2390,3268,3269,3703,3704,4842,4868,701,210,207,204,215,203,212,223,216,222,220,201,209,221,217,208,214,218,202,206,211,213,219,200,205];
+async function pollSRAhead(){
+  if(!srChannels){try{const c=await getJSON('https://api.sr.se/api/v2/channels?format=json&pagination=false');srChannels={};(c.channels||[]).forEach(ch=>srChannels[ch.id]=ch);}catch(e){}} // full SR schedule for today and tomorrow; keeps the first slot of each run of sport programming
+  const day=o=>new Date(Date.now()+o*864e5+36e5).toISOString().slice(0,10);
+  const out=[];const q=[];for(const id of SR_SPORT_CH)for(const d of [day(0),day(1)])q.push([id,d]);
+  const worker=async()=>{while(q.length){const[id,d]=q.shift();try{const j=await getJSON(`https://api.sr.se/api/v2/scheduledepisodes?channelid=${id}&date=${d}&format=json&pagination=false`);
+    let lastEnd=0,lastTitle='';for(const e of j.schedule||[]){const txt=`${e.title||''} ${e.description||''}`;if(!SR_RE.test(txt)||/^(Ekot|Nyheter|P4 Extra)/.test(e.title||''))continue;
+      const t=srTime(e.starttimeutc),en=srTime(e.endtimeutc);if(!t)continue;
+      // a new block only if this is a different programme or there's a gap of over 50 minutes since the last sport slot
+      if(e.title!==lastTitle||t-lastEnd>50*6e4)out.push({t,ch:{id,name:id===179?'Radiosporten':(srChannels?.[id]?.name||e.channel?.name||'Extra')},title:e.title,sport:srSport(txt)});
+      lastEnd=en||t;lastTitle=e.title;}}catch(err){}}};
+  await Promise.all(Array.from({length:6},worker));
+  srAhead=out.filter(x=>x.t);
+}
 async function refresh(){
   const jobs=[pollESPN(),pollSR()];
   if(Date.now()-lastTSDB>10*6e4){lastTSDB=Date.now();jobs.push(pollTSDB());}
   if(Date.now()-lastAhead>30*6e4){lastAhead=Date.now();jobs.push(pollESPNAhead());}
+  if(Date.now()-lastSRAhead>30*6e4){lastSRAhead=Date.now();jobs.push(pollSRAhead());}
   await Promise.all(jobs);resolve();
   if(curSt){curSt=STATIONS.find(x=>x.id===curSt.id)||curSt;}
   showDisplay();drawGuide();
