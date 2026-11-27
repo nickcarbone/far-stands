@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Far Stands — World Sport Receiver</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Far Stands">
+<meta name="theme-color" content="#2a170c">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Playfair+Display+SC:wght@400;700&family=Courier+Prime&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wood1:#3b2213;--wood2:#5a3420;--wood3:#2a170c;
+  --ivory:#efe2bf;--ivory-d:#d9c79a;--ink:#3a2a18;--ink-l:#8a7652;
+  --amber:#ffb347;--amber-g:rgba(255,170,60,.55);--needle:#c0281a;
+  --brass:#c9a15a;--bake:#1d1510;--green:#5fe08a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#120a05;color:var(--ivory);font-family:'Josefin Sans',system-ui,sans-serif}
+body{padding:clamp(8px,3vw,36px);padding-bottom:max(24px,env(safe-area-inset-bottom))}
+.cabinet{max-width:1180px;margin:0 auto;border-radius:28px;padding:clamp(14px,2.4vw,30px);
+  background:
+    repeating-linear-gradient(92deg,rgba(0,0,0,.0) 0 7px,rgba(0,0,0,.08) 7px 9px,rgba(255,255,255,.03) 9px 14px),
+    radial-gradient(120% 80% at 30% 20%,var(--wood2),var(--wood1) 55%,var(--wood3));
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.12),inset 0 -6px 18px rgba(0,0,0,.6),0 30px 60px rgba(0,0,0,.7);}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:0 6px 14px}
+.brand{font-family:'Playfair Display SC',serif;font-size:clamp(22px,3.4vw,38px);letter-spacing:.06em;color:#e9cf93;
+  text-shadow:0 1px 0 #000,0 0 1px #000}
+.brand small{display:block;font-family:'Josefin Sans';font-size:11px;letter-spacing:.42em;color:#b7975c;text-transform:uppercase;margin-top:2px}
+.badge{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#b7975c;text-align:right;line-height:1.5}
+.badge b{color:#e9cf93;font-weight:600}
+/* grille */
+.grille{height:clamp(46px,7vw,84px);border-radius:14px;margin-bottom:16px;
+  background:repeating-linear-gradient(90deg,#2b1d12 0 2px,#6d5434 2px 3px,#2b1d12 3px 5px),
+             repeating-linear-gradient(0deg,rgba(0,0,0,.35) 0 2px,transparent 2px 4px),#3a2a1a;
+  box-shadow:inset 0 3px 10px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.08);position:relative;overflow:hidden}
+.grille .eye{position:absolute;right:18px;top:50%;transform:translateY(-50%);width:clamp(34px,5vw,54px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,#0b1a10 0 22%,transparent 23%),conic-gradient(from 0deg,#0d2414 0 360deg);
+  box-shadow:0 0 0 3px #8c7445,0 0 0 5px #2b1d12,inset 0 0 8px #000}
+.grille .eye i{position:absolute;inset:6%;border-radius:50%;background:conic-gradient(from calc(180deg - var(--sig,10deg)),var(--green) 0 calc(var(--sig,10deg)*2),transparent 0);
+  -webkit-mask:radial-gradient(circle,transparent 24%,#000 25%);mask:radial-gradient(circle,transparent 24%,#000 25%);opacity:.18;transition:opacity .4s}
+.on .grille .eye i{opacity:.92;filter:drop-shadow(0 0 6px rgba(95,224,138,.6))}
+.grille .eyelbl{position:absolute;right:calc(18px + clamp(34px,5vw,54px) + 12px);top:50%;transform:translateY(-50%);font-size:10px;letter-spacing:.3em;color:#a98d59;text-transform:uppercase}
+/* dial */
+.dialwrap{border-radius:16px;padding:10px;background:linear-gradient(#b8924e,#7e5e2c);box-shadow:inset 0 1px 0 #f3d9a0,0 4px 10px rgba(0,0,0,.6)}
+.dial{position:relative;height:clamp(190px,24vw,250px);border-radius:10px;overflow:hidden;cursor:ew-resize;touch-action:none;user-select:none;-webkit-user-select:none;
+  background:linear-gradient(180deg,#e9dbb4,#f3e8c9 30%,#e8d8ae);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25),inset 0 0 40px rgba(110,80,30,.35);
+  transition:filter .6s}
+.dial::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(170deg,rgba(255,255,255,.35),transparent 35%,transparent 70%,rgba(255,255,255,.12));}
+.on .dial{background:radial-gradient(120% 140% at 50% 60%,#fff3d2,#f6dfa6 45%,#e4c27c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25),inset 0 0 50px rgba(255,160,40,.45)}
+.scale{position:absolute;left:3%;right:3%;top:0;bottom:0}
+.bandrow{position:absolute;left:0;right:0;height:1px;background:var(--ink);opacity:.55}
+.bandlbl{position:absolute;left:-2.2%;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--ink)}
+.tick{position:absolute;width:1px;background:var(--ink);opacity:.6}
+.khz{position:absolute;font-family:'Courier Prime',monospace;font-size:10px;color:var(--ink-l);transform:translateX(-50%)}
+.stn{position:absolute;transform:translateX(-50%);text-align:center;white-space:nowrap;color:var(--ink-l);cursor:pointer;line-height:1.05;padding:2px 3px;border-radius:3px}
+.stn .c{font-family:'Playfair Display SC',serif;font-size:clamp(9px,1vw,12px);letter-spacing:.03em}
+.stn .s{font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.stn .lamp{display:block;margin:2px auto 0;width:7px;height:7px;border-radius:50%;background:#8a7a5a;box-shadow:inset 0 1px 1px rgba(0,0,0,.5)}
+.stn.live{color:var(--ink);font-weight:700}
+.stn.live .lamp{background:var(--amber);box-shadow:0 0 6px 2px var(--amber-g)}
+.stn.talk .lamp{background:#9bd17a;box-shadow:0 0 5px 1px rgba(150,220,120,.5)}
+.stn.locked .lamp{background:#c55;box-shadow:none}
+.stn.dead{text-decoration:line-through;opacity:.5}
+.stn.cur{background:rgba(192,40,26,.12);outline:1px solid rgba(192,40,26,.4)}
+.needle{position:absolute;top:4%;bottom:4%;width:3px;margin-left:-1.5px;background:linear-gradient(var(--needle),#8d1a10);box-shadow:0 0 6px rgba(192,40,26,.6),1px 0 0 rgba(0,0,0,.3);border-radius:2px;pointer-events:none;z-index:5}
+.needle::before{content:"";position:absolute;top:-6px;left:50%;width:11px;height:11px;transform:translateX(-50%) rotate(45deg);background:var(--needle)}
+.dialfoot{display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.35em;text-transform:uppercase;color:#4a3518;padding:6px 4px 0}
+/* controls */
+.controls{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(12px,3vw,40px);align-items:center;margin-top:18px}
+.knobbox{text-align:center;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#c7a86b}
+.knob{width:clamp(74px,10vw,110px);aspect-ratio:1;border-radius:50%;margin:0 auto 8px;position:relative;cursor:grab;touch-action:none;
+  background:repeating-conic-gradient(from 0deg,#2a201a 0 4deg,#14100c 4deg 8deg);
+  box-shadow:0 0 0 4px #6d5532,0 0 0 6px #1b130d,0 8px 16px rgba(0,0,0,.7),inset 0 0 0 10px rgba(0,0,0,.25)}
+.knob .cap{position:absolute;inset:18%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4e3e31,#1b1410 70%);box-shadow:inset 0 2px 2px rgba(255,255,255,.12),0 2px 4px rgba(0,0,0,.6)}
+.knob .mark{position:absolute;left:50%;top:8%;width:3px;height:22%;margin-left:-1.5px;background:#e8d29a;border-radius:2px;transform-origin:50% 190%}
+.knob:active{cursor:grabbing}
+.keys{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.key{font-family:'Josefin Sans';font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#2a1c10;cursor:pointer;
+  border:none;border-radius:6px 6px 9px 9px;padding:14px 14px 12px;min-width:76px;
+  background:linear-gradient(#f3e6c4,#d7c08c);box-shadow:0 5px 0 #8a6d3b,0 7px 10px rgba(0,0,0,.6),inset 0 1px 0 #fff;transition:transform .08s,box-shadow .08s}
+.key:active,.key.down{transform:translateY(4px);box-shadow:0 1px 0 #8a6d3b,0 2px 4px rgba(0,0,0,.6),inset 0 1px 0 #fff}
+.key.down{background:linear-gradient(#ffd98f,#e7b85a)}
+.key.power{background:linear-gradient(#e0614f,#a42c1f);color:#fff2dc;box-shadow:0 5px 0 #5c160e,0 7px 10px rgba(0,0,0,.6),inset 0 1px 0 #ff9b8a}
+.key.power.down{background:linear-gradient(#ff7b62,#c93c2a)}
+.bandsel{display:flex;justify-content:center;gap:4px;margin-top:12px}
+.bandsel button{font:600 10px 'Josefin Sans';letter-spacing:.22em;text-transform:uppercase;color:#c7a86b;background:#1c130c;border:1px solid #6d5532;padding:7px 10px;border-radius:4px;cursor:pointer}
+.bandsel button.sel{color:#1c130c;background:#e2c27a}
+/* readout */
+.lower{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;margin-top:22px}
+.card{background:linear-gradient(#f4ead0,#e6d6ac);color:var(--ink);border-radius:8px;padding:16px 18px;box-shadow:0 6px 14px rgba(0,0,0,.55),inset 0 0 0 1px rgba(0,0,0,.15);position:relative}
+.card h3{margin:0 0 10px;font:700 10px 'Josefin Sans';letter-spacing:.38em;text-transform:uppercase;color:#7b6440;border-bottom:1px solid rgba(58,42,24,.25);padding-bottom:6px;display:flex;justify-content:space-between}
+.onair .stname{font-family:'Playfair Display SC',serif;font-size:clamp(20px,2.6vw,28px);line-height:1.1}
+.onair .meta{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#7b6440;margin-top:4px}
+.onair .match{font-family:'Courier Prime',monospace;font-size:clamp(15px,1.8vw,19px);margin-top:12px;line-height:1.35}
+.onair .match .score{font-weight:700}
+.onair .detail{font-size:13px;margin-top:6px;color:#5a4528}
+.onair .note{font-size:12px;margin-top:10px;color:#7a3a1c;font-style:italic}
+.onair a{color:#7a3a1c}
+.stars{letter-spacing:.15em;color:#b5661a;font-size:13px}
+.status{font-family:'Courier Prime',monospace;font-size:12px;color:#6b5532;margin-top:12px;min-height:1.3em}
+.log{list-style:none;margin:0;padding:0;font-size:13px;max-height:300px;overflow:auto}
+.log li{display:grid;grid-template-columns:58px 1fr;gap:8px;padding:6px 2px;border-bottom:1px dotted rgba(58,42,24,.3);cursor:pointer}
+.log li:hover{background:rgba(255,179,71,.18)}
+.log li .t{font-family:'Courier Prime',monospace;color:#7b6440}
+.log li .w{font-size:11px;color:#7b6440;letter-spacing:.04em}
+.log li.lk{cursor:default;opacity:.65}
+.log .empty{display:block;color:#7b6440;font-style:italic;cursor:default}
+.tabs{display:flex;gap:12px}
+.tabs span{cursor:pointer;opacity:.55}.tabs span.sel{opacity:1;color:#3a2a18}
+.foot{margin:18px 8px 0;font-size:11px;line-height:1.6;color:#a98d59}
+.foot a{color:#d7b977}
+.quiet{position:absolute;right:10px;bottom:8px;font:700 9px 'Josefin Sans';letter-spacing:.3em;text-transform:uppercase;color:#7a3a1c;opacity:0;transition:opacity .4s}
+.quiet.show{opacity:.85}
+@media (max-width:820px){
+  .lower{grid-template-columns:1fr}
+  .controls{grid-template-columns:1fr 1fr}
+  .controls .mid{grid-column:1/-1;order:-1}
+  .key{min-width:0;padding:12px 10px 10px;font-size:11px;letter-spacing:.12em}
+  .dial{height:220px}
+  .stn .c{font-size:8.5px}
+  .stn:not(.live):not(.cur) .c{visibility:hidden}
+  .khz:nth-of-type(even){display:none}
+  .card h3{font-size:9px;letter-spacing:.25em}
+  .stn .s{display:none}
+  .badge{display:none}
+}
+</style>
+</head>
+<body>
+<div class="cabinet" id="cab">
+  <div class="top">
+    <div class="brand">The Far Stands<small>World Sport Receiver · Live commentary, other tongues</small></div>
+    <div class="badge"><span id="clock">--:--</span> local<br><b id="countLive">0</b> games on the band</div>
+  </div>
+  <div class="grille"><span class="eyelbl" id="eyelbl">Signal</span><div class="eye"><i id="eye"></i></div></div>
+  <div class="dialwrap">
+    <div class="dial" id="dial">
+      <div class="scale" id="scale"></div>
+      <div class="needle" id="needle"></div>
+      <div class="quiet" id="quiet">Quiet hours · sports talk on the band</div>
+    </div>
+    <div class="dialfoot"><span>Long wave</span><span>Medium wave</span><span>Short wave</span></div>
+  </div>
+  <div class="controls">
+    <div class="knobbox"><div class="knob" id="vol"><div class="cap"></div><div class="mark"></div></div>Volume</div>
+    <div class="mid">
+      <div class="keys">
+        <button class="key power" id="kPower">Power</button>
+        <button class="key" id="kPrev">◂ Prev</button>
+        <button class="key" id="kScan">Scan</button>
+        <button class="key" id="kLock">Lock</button>
+        <button class="key" id="kNext">Next ▸</button>
+      </div>
+      <div class="bandsel" id="bandsel">
+        <button data-b="auto" class="sel">Auto</button><button data-b="games">Games only</button><button data-b="talk">Sports talk</button><button data-b="all">Whole dial</button>
+      </div>
+    </div>
+    <div class="knobbox"><div class="knob" id="tune"><div class="cap"></div><div class="mark"></div></div>Tuning</div>
+  </div>
+  <div class="lower">
+    <div class="card onair" id="onair">
+      <h3><span>On air</span><span class="stars" id="stars"></span></h3>
+      <div class="stname" id="oName">Receiver off</div>
+      <div class="meta" id="oMeta">Press power to warm the valves</div>
+      <div class="match" id="oMatch"></div>
+      <div class="detail" id="oDetail"></div>
+      <div class="note" id="oNote"></div>
+      <div class="status" id="oStatus"></div>
+    </div>
+    <div class="card">
+      <h3><span class="tabs"><span data-t="now" class="sel">On the band</span><span data-t="next">Coming up</span></span><span id="upd">—</span></h3>
+      <ul class="log" id="log"></ul>
+    </div>
+  </div>
+  <div class="foot">
+    Fixtures: ESPN public scoreboard feeds, TheSportsDB (free tier) and the Sveriges Radio open API. A station lamp lights when a fixture it carries is in progress; commentary rights change season to season, and a lit lamp means the station's league is live, not that every match is being called. Some broadcasters block live sport outside their country. Streams resolved via <a href="https://www.radio-browser.info" target="_blank" rel="noopener">radio-browser.info</a>. Volume is fixed on iPhone (use the side buttons).
+  </div>
+</div>
+<audio id="audio" preload="none" playsinline></audio>
+<script>
+/* ============================================================
+   DATA — stations. pos = place on the dial (0..1), row = 0 upper / 1 lower
+   feeds: espn:'sport/league' (+ optional teams filter), tsdb:{id,dur}
+   lang drives the rarity score; sportW is sport rarity (1..10)
+   ============================================================ */
+const CLUBS={
+  es:['real madrid','atletico madrid','atlético madrid','barcelona','athletic club','real sociedad','villarreal','real betis','sevilla','valencia','girona'],
+  it:['inter','milan','juventus','napoli','roma','lazio','atalanta','bologna','fiorentina'],
+  nl:['psv','ajax','feyenoord','az alkmaar','twente'],
+  pt:['benfica','porto','sporting','braga'],
+  ar:['boca juniors','river plate','racing','independiente','san lorenzo','estudiantes','velez','vélez','talleres','lanus','lanús','argentinos','rosario central',"newell's",'huracan','huracán','belgrano','defensa y justicia','godoy cruz'],
+  rio:['flamengo','fluminense','vasco','botafogo'],
+  sp:['corinthians','palmeiras','sao paulo','são paulo','santos','bragantino'],
+  bh:['atletico-mg','atlético-mg','atletico mineiro','atlético mineiro','cruzeiro','america-mg','américa-mg'],
+  poa:['gremio','grêmio','internacional','juventude'],
+  cz:['slavia','sparta prague','sparta praha','viktoria','plzen','plzeň'],
+  cat:['barcelona','espanyol','girona']
+};
+const UEFA=['soccer/uefa.champions','soccer/uefa.europa'], CONMEBOL=['soccer/conmebol.libertadores','soccer/conmebol.sudamericana'];
+const cup=(paths,teams)=>paths.map(p=>({espn:p,teams}));
+const STATIONS=[
+ {id:'tsf',city:'Lisboa',dl:'TSF',name:'TSF Rádio Notícias',country:'Portugal',flag:'🇵🇹',lang:'Portuguese',pos:0.03,row:0,url:'https://directo.tsf.pt/tsfdirecto.mp3',site:'https://www.tsf.pt',feeds:[{espn:'soccer/por.1'},...cup(UEFA,CLUBS.pt)]},
+ {id:'ant1',city:'Lisboa',dl:'Antena 1',name:'Antena 1 (RTP)',country:'Portugal',flag:'🇵🇹',lang:'Portuguese',pos:0.065,row:1,url:'https://streaming-live.rtp.pt/liveradio/antena180a/playlist.m3u8',uuid:'8267a9f9-e776-4b59-90e5-1179dfe1ad40',site:'https://www.rtp.pt/play/direto/antena1',feeds:[{espn:'soccer/por.1'},...cup(UEFA,CLUBS.pt)]},
+ {id:'rr',city:'Lisboa',dl:'Renascença',name:'Rádio Renascença',country:'Portugal',flag:'🇵🇹',lang:'Portuguese',pos:0.1,row:0,url:'https://22593.live.streamtheworld.com/RADIO_RENASCENCAAAC.aac',uuid:'31691688-2a1a-4fea-b67c-ac94980c4c74',site:'https://rr.sapo.pt',feeds:[{espn:'soccer/por.1'}]},
+ {id:'ser',city:'Madrid',dl:'SER',name:'Cadena SER · Carrusel',country:'Spain',flag:'🇪🇸',lang:'Spanish',pos:0.135,row:1,url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3',uuid:'5ab7291b-cf83-4bbd-90fb-48f30db4c315',site:'https://cadenaser.com',feeds:[{espn:'soccer/esp.1'},...cup(UEFA,CLUBS.es)]},
+ {id:'cope',city:'Madrid',dl:'COPE',name:'COPE · Tiempo de Juego',country:'Spain',flag:'🇪🇸',lang:'Spanish',pos:0.17,row:0,url:'https://net1-cope-rrcast.flumotion.com/cope/net1-low.mp3',uuid:'00526b4f-47a3-432d-baca-f914c1273f0b',site:'https://www.cope.es',feeds:[{espn:'soccer/esp.1'},...cup(UEFA,CLUBS.es)]},
+ {id:'marca',city:'Madrid',dl:'Marca',name:'Radio MARCA',country:'Spain',flag:'🇪🇸',lang:'Spanish',pos:0.205,row:1,talk:true,url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIOMARCA_NACIONAL_SC',uuid:'07dbb40c-f3a8-4f45-925d-c16ef08c7293',site:'https://www.marca.com/radio.html',feeds:[{espn:'soccer/esp.1'}]},
+ {id:'rac1',city:'Barcelona',dl:'RAC1',name:'RAC1 · Tu diràs',country:'Catalonia, Spain',flag:'🇪🇸',lang:'Catalan',pos:0.24,row:0,url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RAC_1.mp3',uuid:'4c289274-8f55-4e8e-b3e0-cbfff38df83b',site:'https://www.rac1.cat',feeds:[{espn:'soccer/esp.1',teams:CLUBS.cat},...cup(UEFA,CLUBS.cat)]},
+ {id:'rmc',city:'Paris',dl:'RMC',name:'RMC · Info Talk Sport',country:'France',flag:'🇫🇷',lang:'French',pos:0.275,row:1,talk:true,url:'https://audio.bfmtv.com/rmcradio_128.mp3',uuid:'2dcf08e1-215c-41cc-b413-1c0103b327f9',site:'https://rmc.bfmtv.com',feeds:[]},
+ {id:'npo1',city:'Hilversum',dl:'Hilversum',name:'NPO Radio 1 · Langs de Lijn',country:'Netherlands',flag:'🇳🇱',lang:'Dutch',pos:0.31,row:0,url:'https://icecast.omroep.nl/radio1-bb-aac',uuid:'5c9ed574-3b9d-4431-826d-72cf10df46dc',site:'https://www.nporadio1.nl',feeds:[{espn:'soccer/ned.1'},...cup(UEFA,CLUBS.nl)]},
+ {id:'wdr2',city:'Köln',dl:'WDR 2',name:'WDR 2 · Bundesliga live',country:'Germany',flag:'🇩🇪',lang:'German',pos:0.345,row:1,url:'https://wdr-wdr2-rheinruhr.icecastssl.wdr.de/wdr/wdr2/rheinruhr/mp3/128/stream.mp3',uuid:'feb978ba-8e34-4993-9082-ae4af186ecda',site:'https://www1.wdr.de/radio/wdr2/',feeds:[{espn:'soccer/ger.1'}]},
+ {id:'rai1',city:'Roma',dl:'Rai 1',name:'Rai Radio 1 · Tutto il calcio',country:'Italy',flag:'🇮🇹',lang:'Italian',pos:0.38,row:0,url:'https://icestreaming.rai.it/1.mp3',uuid:'96185693-0601-11e8-ae97-52543be04c81',site:'https://www.raiplaysound.it/radio1',feeds:[{espn:'soccer/ita.1'},...cup(UEFA,CLUBS.it)]},
+ {id:'sportiva',city:'Prato',dl:'Sportiva',name:'Radio Sportiva',country:'Italy',flag:'🇮🇹',lang:'Italian',pos:0.415,row:1,talk:true,url:'https://sportiva.inmystream.it/stream/sportiva',uuid:'dd641269-eb06-4b43-8c6e-e4f8882e8cbb',site:'https://www.radiosportiva.com',feeds:[]},
+ {id:'cro',city:'Praha',dl:'Praha',name:'ČRo Radiožurnál Sport',country:'Czechia',flag:'🇨🇿',lang:'Czech',pos:0.45,row:0,talk:true,url:'https://rozhlas.stream/sport_aac_128.aac',site:'https://sport.rozhlas.cz',sportW:7,feeds:[{tsdb:{id:4923,dur:165,sport:'Ice hockey',league:'Czech Extraliga'}},{espn:'soccer/cze.1'},...cup(UEFA,CLUBS.cz)]},
+ {id:'ssfm',city:'Lefkosia',dl:'Lefkosia',name:'Super Sport FM',country:'Cyprus',flag:'🇨🇾',lang:'Greek',pos:0.485,row:1,talk:true,url:'https://r1.cloudskep.com/radio3/supersportfm/icecast.audio',uuid:'46927910-5bd1-4142-aac9-73e12942e9d3',site:'https://supersportfm.com',feeds:[]},
+ /* Sveriges Radio channels are added live from the SR API between .52 and .61 */
+ {id:'rte1',city:'Dublin',dl:'Dublin',name:'RTÉ Radio 1 · Sport',country:'Ireland',flag:'🇮🇪',lang:'English',pos:0.635,row:1,url:'https://liveaudio.rte.ie/hls-radio/radio1/chunklist.m3u8',uuid:'02dd025e-d691-4310-bd2f-cf16007bdefb',site:'https://www.rte.ie/radio/radio1/',sportW:5,feeds:[{espn:'rugby/270557',teams:['leinster','munster','ulster','connacht']},{espn:'rugby/289234',teams:['ireland']}]},
+ {id:'mitre',city:'Buenos Aires',dl:'Mitre',name:'Radio Mitre',country:'Argentina',flag:'🇦🇷',lang:'Spanish',pos:0.67,row:0,url:'https://playerservices.streamtheworld.com/api/livestream-redirect/AM790_56AAC_SC',uuid:'c0cf2d87-993c-4cb6-97ad-f508a3fc5495',site:'https://radiomitre.cienradios.com',feeds:[{espn:'soccer/arg.1'},{espn:'soccer/arg.copa'},...cup(CONMEBOL,CLUBS.ar)]},
+ {id:'lared',city:'Buenos Aires',dl:'La Red',name:'La Red AM 910',country:'Argentina',flag:'🇦🇷',lang:'Spanish',pos:0.705,row:1,url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_RED_AM910AAC.aac',uuid:'5440e89d-708d-4336-9b42-fa274ed093b1',site:'https://www.lared.am',feeds:[{espn:'soccer/arg.1'},{espn:'soccer/arg.copa'},...cup(CONMEBOL,CLUBS.ar)]},
+ {id:'riva',city:'Buenos Aires',dl:'Rivadavia',name:'Radio Rivadavia',country:'Argentina',flag:'🇦🇷',lang:'Spanish',pos:0.74,row:0,talk:true,url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RIVADAVIA.mp3',uuid:'e085b71b-aa0f-43f1-b24a-2bead9a8238c',site:'https://www.rivadavia.com.ar',feeds:[{espn:'soccer/arg.1'}]},
+ {id:'tupi',city:'Rio',dl:'Tupi',name:'Super Rádio Tupi',country:'Brazil',flag:'🇧🇷',lang:'Portuguese',pos:0.775,row:1,url:'https://8923.brasilstream.com.br/stream',uuid:'84a51775-4137-48c8-b72b-85f4b5edc7e5',site:'https://www.tupi.fm',feeds:[{espn:'soccer/bra.1',teams:CLUBS.rio},...cup(CONMEBOL,CLUBS.rio)]},
+ {id:'nacrj',city:'Rio',dl:'Nacional',name:'Rádio Nacional (EBC)',country:'Brazil',flag:'🇧🇷',lang:'Portuguese',pos:0.81,row:0,url:'https://radionacionalrio-stream.ebc.com.br/ebc/radionacionalriodejaneiro/playlist.m3u8',uuid:'0f60e584-d0fd-42ca-bc27-8082df7e6ff6',site:'https://radios.ebc.com.br',feeds:[{espn:'soccer/bra.1',teams:CLUBS.rio},...cup(CONMEBOL,CLUBS.rio)]},
+ {id:'band',city:'São Paulo',dl:'Bandeirantes',name:'Rádio Bandeirantes',country:'Brazil',flag:'🇧🇷',lang:'Portuguese',pos:0.845,row:1,url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RadioBandeirantesAAC.aac',uuid:'ad039169-2969-4a7a-be83-86f079f4a55e',site:'https://www.band.uol.com.br/radio-bandeirantes',feeds:[{espn:'soccer/bra.1',teams:CLUBS.sp},...cup(CONMEBOL,CLUBS.sp)]},
+ {id:'itat',city:'Belo Horizonte',dl:'Itatiaia',name:'Rádio Itatiaia',country:'Brazil',flag:'🇧🇷',lang:'Portuguese',pos:0.88,row:0,url:'https://8903.brasilstream.com.br/stream',uuid:'e5844d74-ce83-4e37-9b01-006b07c649e0',site:'https://www.itatiaia.com.br',feeds:[{espn:'soccer/bra.1',teams:CLUBS.bh},...cup(CONMEBOL,CLUBS.bh)]},
+ {id:'gaucha',city:'Porto Alegre',dl:'Gaúcha',name:'Rádio Gaúcha',country:'Brazil',flag:'🇧🇷',lang:'Portuguese',pos:0.915,row:1,url:'https://liverdgaupoa.rbsdirect.com.br/primary/gaucha_rbs.sdp/playlist.m3u8',uuid:'02fb63e7-410d-4dcb-a85f-1665cbd67a83',site:'https://gauchazh.clicrbs.com.br',feeds:[{espn:'soccer/bra.1',teams:CLUBS.poa},...cup(CONMEBOL,CLUBS.poa)]},
+ {id:'abc',city:'Sydney',dl:'ABC Sport',name:'ABC Sport',country:'Australia',flag:'🇦🇺',lang:'English',pos:0.95,row:0,talk:true,url:'https://abc.streamguys1.com/live/sport/icecast.audio',uuid:'c38dd3a9-a6e0-4a92-b5fc-b34a739a400a',site:'https://www.abc.net.au/listen/live/sport',feeds:[{espn:'australian-football/afl',sport:'Aussie rules'},{espn:'rugby-league/3',sport:'Rugby league'},{espn:'rugby/289234',teams:['australia']}]},
+ {id:'nhk',city:'Tokyo',dl:'NHK',name:'NHK Radio 1 · Ōzumō',country:'Japan',flag:'🇯🇵',lang:'Japanese',pos:0.982,row:1,locked:'Japan-only stream (らじる★らじる is geo-restricted). Tap to open NHK’s player.',site:'https://www.nhk.or.jp/radio/',sportW:10,
+   cal:{sport:'Sumo',league:'Grand Sumo Tournament',
+     /* [first day, last day] local JST; R1 carries the makuuchi division ~15:45–18:00 JST. Add later basho as the Sumo Association confirms them. */
+     basho:[['2027-01-10','2027-01-24','Hatsu basho · Ryōgoku Kokugikan']],from:'15:45',to:'18:00'}}
+];
+const SPORT_W={'Football':3,'Soccer':3,'Ice hockey':7,'Bandy':10,'Handball':8,'Floorball':9,'Biathlon':9,'Cross-country skiing':9,'Alpine skiing':7,'Aussie rules':8,'Rugby league':6,'Rugby union':5,'Rugby':5,'Sumo':10,'Basketball':4,'Speedway':9,'Harness racing':9,'Athletics':5,'Volleyball':6,'Sports talk':2};
+const ESPN_SPORT={'soccer':'Football','australian-football':'Aussie rules','rugby-league':'Rugby league','rugby':'Rugby union','hockey':'Ice hockey'};
+const LANG_B={English:-4,Spanish:0,Portuguese:0,French:0,German:0,Italian:0};
+function rarity(st,sport){const sw=st.sportW&&!sport?st.sportW:(SPORT_W[sport]??4);const lb=LANG_B[st.lang]??2;return sw+lb;}
+function starsFor(r){const n=Math.max(1,Math.min(5,Math.round((r+2)/2.6)));return '★'.repeat(n)+'<span style="opacity:.25">'+'★'.repeat(5-n)+'</span>';}
+
+/* ============================================================ state */
+const $=id=>document.getElementById(id);
+const audio=$('audio');
+let power=false, scanning=true, band='auto', curPos=.5, targetPos=.5, curSt=null, dwellTimer=null, scanIdx=-1, logTab='now';
+const espnCache={}, tsdbCache={}; let srLive=[], srNext=[], srChannels=null;
+const dead={};            // id -> until timestamp
+let liveMap={};          // id -> {live,sport,title,score,detail,league,events}
+let upcoming=[];
+const norm=s=>(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+
+/* ============================================================ fetchers */
+async function getJSON(u,ms=12000){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);try{const r=await fetch(u,{signal:c.signal});if(!r.ok)throw new Error(r.status);return await r.json();}finally{clearTimeout(t)}}
+function espnPaths(){const s=new Set();STATIONS.forEach(st=>(st.feeds||[]).forEach(f=>f.espn&&s.add(f.espn)));return [...s];}
+async function pollESPN(){
+  await Promise.all(espnPaths().map(async p=>{try{const d=await getJSON(`https://site.api.espn.com/apis/site/v2/sports/${p}/scoreboard`);espnCache[p]={league:d.leagues?.[0]?.name||p,events:d.events||[]};}catch(e){}}));
+}
+const ymd=d=>d.toISOString().slice(0,10);
+async function pollTSDB(){
+  const ids=new Set();STATIONS.forEach(st=>(st.feeds||[]).forEach(f=>f.tsdb&&ids.add(f.tsdb.id)));
+  const now=new Date(), days=[ymd(new Date(now-864e5)),ymd(now)];
+  for(const id of ids){let ev=[];for(const d of days){try{const j=await getJSON(`https://www.thesportsdb.com/api/v1/json/123/eventsday.php?d=${d}&l=${id}`);ev=ev.concat(j.events||[]);}catch(e){} await new Promise(r=>setTimeout(r,1500));}tsdbCache[id]=ev;}
+}
+const SR_RE=/(fotboll|ishockey|hockey|bandy|handboll|innebandy|basket|skidskytte|längdskid|langdskid|alpint|friidrott|speedway|trav|volleyboll|radiosporten|sporten|\bsport|shl|allsvenskan|damallsvenskan|vm-|em-|världscup)/i;
+const SR_SPORT=[[/bandy/i,'Bandy'],[/hockey|shl/i,'Ice hockey'],[/innebandy/i,'Floorball'],[/handboll/i,'Handball'],[/skidskytte/i,'Biathlon'],[/längd|langd/i,'Cross-country skiing'],[/alpin/i,'Alpine skiing'],[/fotboll|allsvenskan/i,'Football'],[/speedway/i,'Speedway'],[/trav/i,'Harness racing'],[/basket/i,'Basketball'],[/friidrott/i,'Athletics']];
+const srSport=t=>{for(const[r,s]of SR_SPORT)if(r.test(t))return s;return 'Sports talk';};
+async function pollSR(){
+  try{
+    if(!srChannels){const c=await getJSON('https://api.sr.se/api/v2/channels?format=json&pagination=false');srChannels={};(c.channels||[]).forEach(ch=>srChannels[ch.id]=ch);}
+    const d=await getJSON('https://api.sr.se/api/v2/scheduledepisodes/rightnow?format=json&pagination=false');
+    srLive=[];srNext=[];
+    (d.channels||[]).forEach(ch=>{
+      const cur=ch.currentscheduledepisode, nx=ch.nextscheduledepisode;
+      const isP1=ch.id===132; // P1 general; skip unless sport
+      const txt=e=>e?`${e.title||''} ${e.description||''}`:'';
+      if(cur&&SR_RE.test(txt(cur))&&!/^Ekot/.test(cur.title||''))srLive.push({ch,ep:cur});
+      if(nx&&SR_RE.test(txt(nx))&&!/^Ekot/.test(nx.title||''))srNext.push({ch,ep:nx});
+    });
+  }catch(e){}
+}
+const SR_LIVE1={132:'p1',701:'p4sth',210:'p4gavl',207:'p4malm',204:'p4vrml',215:'p4vbtn',203:'p4jkpg',212:'p4gbg',223:'p4dala',216:'p4vnrl',222:'p4ostg',220:'p4hall',201:'p4kalm'};
+const srTime=s=>{const m=/\d+/.exec(s||'');return m?new Date(+m[0]):null;};
+
+/* ============================================================ live resolution */
+function teamMatch(ev,teams){if(!teams)return true;const cs=ev.competitions?.[0]?.competitors||[];return cs.some(c=>{const n=norm([c.team?.displayName,c.team?.shortDisplayName,c.team?.location,c.team?.name].join(' | '));return teams.some(t=>n.includes(norm(t)));});}
+function evLine(ev){const cs=ev.competitions?.[0]?.competitors||[];const h=cs.find(c=>c.homeAway==='home')||cs[0],a=cs.find(c=>c.homeAway==='away')||cs[1];if(!h||!a)return{title:ev.name||'',score:''};return{title:`${h.team.shortDisplayName||h.team.displayName} v ${a.team.shortDisplayName||a.team.displayName}`,score:(h.score!=null&&a.score!=null)?`${h.score}–${a.score}`:''};}
+function sportFromPath(p,f){return f.sport||ESPN_SPORT[p.split('/')[0]]||'Football';}
+function resolve(){
+  const now=Date.now();liveMap={};upcoming=[];
+  for(const st of STATIONS){
+    const lives=[];
+    for(const f of st.feeds||[]){
+      if(f.espn&&espnCache[f.espn]){
+        for(const ev of espnCache[f.espn].events){
+          if(!teamMatch(ev,f.teams))continue;
+          const state=ev.status?.type?.state, l=evLine(ev), sport=sportFromPath(f.espn,f);
+          if(state==='in')lives.push({sport,league:espnCache[f.espn].league,...l,detail:ev.status?.type?.shortDetail||''});
+          else if(state==='pre'){const t=new Date(ev.date);if(t-now<8*36e5&&t>now-6e5)upcoming.push({t,st,sport,title:l.title,league:espnCache[f.espn].league});}
+        }
+      }
+      if(f.tsdb&&tsdbCache[f.tsdb.id]){
+        for(const ev of tsdbCache[f.tsdb.id]){
+          const t=new Date((ev.strTimestamp||'')+(/Z|\+/.test(ev.strTimestamp||'')?'':'Z'));if(isNaN(t))continue;
+          const done=/^(FT|AOT|AP|AET|PEN|Match Finished|POST|CANC|PST)/i.test(ev.strStatus||'');
+          if(!done&&t<=now&&now<t.getTime()+f.tsdb.dur*6e4)lives.push({sport:f.tsdb.sport,league:f.tsdb.league,title:`${ev.strHomeTeam} v ${ev.strAwayTeam}`,score:(ev.intHomeScore!=null&&ev.intAwayScore!=null)?`${ev.intHomeScore}–${ev.intAwayScore}`:'',detail:'Inferred from start time',inferred:true});
+          else if(!done&&t>now&&t-now<8*36e5)upcoming.push({t,st,sport:f.tsdb.sport,title:`${ev.strHomeTeam} v ${ev.strAwayTeam}`,league:f.tsdb.league});
+        }
+      }
+    }
+    if(st.cal){
+      const jst=new Date(now+9*36e5), day=jst.toISOString().slice(0,10), hm=jst.toISOString().slice(11,16);
+      for(const[b0,b1,name]of st.cal.basho){
+        if(day>=b0&&day<=b1){const dn=Math.round((Date.parse(day)-Date.parse(b0))/864e5)+1;
+          if(hm>=st.cal.from&&hm<st.cal.to)lives.push({sport:st.cal.sport,league:st.cal.league,title:`${name} — Day ${dn}`,score:'',detail:'Makuuchi division, live from the hall',inferred:true});
+          else if(hm<st.cal.from){const[h,m]=st.cal.from.split(':');const t=new Date(Date.parse(day+'T'+st.cal.from+':00+09:00'));upcoming.push({t,st,sport:'Sumo',title:`${name} — Day ${dn}`,league:st.cal.league});}
+        }else if(day<b0){const t=new Date(Date.parse(b0+'T'+st.cal.from+':00+09:00'));if(t-now<10*864e5)upcoming.push({t,st,sport:'Sumo',title:name+' opens',league:st.cal.league});}
+      }
+    }
+    if(lives.length){lives.sort((a,b)=>(SPORT_W[b.sport]||0)-(SPORT_W[a.sport]||0));liveMap[st.id]={live:true,...lives[0],count:lives.length,all:lives};}
+  }
+  // Sveriges Radio dynamic stations
+  STATIONS.splice(0,STATIONS.length,...STATIONS.filter(s=>!s.sr));
+  const srN=srLive.length;
+  srLive.forEach((x,i)=>{
+    const ch=x.ch, full=srChannels?.[ch.id];const sport=srSport(`${x.ep.title} ${x.ep.description||''}`);
+    const st={id:'sr'+ch.id,sr:true,dl:(ch.name||'SR').replace(/^SR /,''),city:(ch.name||'').replace(/^(Sveriges Radio |SR )/,'').replace(/^P4 /,'P4 ')||'Sverige',name:`Sveriges Radio ${ch.name}`,country:'Sweden',flag:'🇸🇪',lang:'Swedish',
+      pos:.52+(srN>1?i*(.09/(srN-1)):.045),row:i%2,url:SR_LIVE1[ch.id]?`https://live1.sr.se/${SR_LIVE1[ch.id]}-mp3-96`:(full?.liveaudio?.url||`https://www.sverigesradio.se/topsy/direkt/srapi/${ch.id}.mp3`),site:full?.siteurl||'https://sverigesradio.se',feeds:[],geo:'Sveriges Radio may swap live sport for other programming outside Sweden.'};
+    STATIONS.push(st);
+    const end=srTime(x.ep.endtimeutc);
+    liveMap[st.id]={live:true,sport,league:'Sveriges Radio schedule',title:x.ep.title,score:'',detail:(x.ep.description||'').slice(0,160)+(end?` · until ${fmtT(end)}`:''),count:1};
+  });
+  srNext.forEach(x=>{const t=srTime(x.ep.starttimeutc);if(t&&t-now<8*36e5)upcoming.push({t,st:{name:'Sveriges Radio '+x.ch.name,city:x.ch.name,flag:'🇸🇪',lang:'Swedish'},sport:srSport(x.ep.title),title:x.ep.title,league:'SR'});});
+  STATIONS.sort((a,b)=>a.pos-b.pos);
+  upcoming.sort((a,b)=>a.t-b.t);
+}
+const fmtT=d=>d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+
+/* ============================================================ band membership */
+function liveGames(){return STATIONS.filter(s=>liveMap[s.id]?.live);}
+function effectiveBand(){if(band!=='auto')return band;return liveGames().filter(s=>!s.locked&&!isDead(s)).length>=2?'games':'mixed';}
+function isDead(s){return dead[s.id]&&dead[s.id]>Date.now();}
+function onBand(s){const b=effectiveBand();const live=!!liveMap[s.id]?.live;
+  if(b==='all')return true;if(b==='games')return live;if(b==='talk')return !!s.talk;return live||!!s.talk;}
+function scanList(){
+  return STATIONS.filter(s=>onBand(s)&&!s.locked&&!isDead(s)&&s.url)
+    .map(s=>{const L=liveMap[s.id];return{s,r:L?.live?rarity(s,L.sport)+3:rarity(s,'Sports talk')};})
+    .sort((a,b)=>b.r-a.r).map(x=>x.s);
+}
+
+/* ============================================================ dial drawing */
+function drawScale(){
+  const sc=$('scale');sc.innerHTML='';
+  const rows=[.40,.80];
+  rows.forEach((y,i)=>{const r=document.createElement('div');r.className='bandrow';r.style.top=(y*100)+'%';sc.appendChild(r);
+    const l=document.createElement('div');l.className='bandlbl';l.style.top=`calc(${y*100}% - 14px)`;l.textContent=i?'SW':'MW';sc.appendChild(l);});
+  for(let i=0;i<=100;i++){const t=document.createElement('div');t.className='tick';const big=i%10===0;t.style.left=i+'%';t.style.top=`calc(40% - ${big?9:4}px)`;t.style.height=(big?9:4)+'px';sc.appendChild(t);
+    if(big){const k=document.createElement('div');k.className='khz';k.style.left=i+'%';k.style.top='calc(40% - 22px)';k.textContent=Math.round(530+i*10.7);sc.appendChild(k);}
+    if(i%5===0){const t2=t.cloneNode();t2.style.top='80%';t2.style.height=(big?7:3)+'px';sc.appendChild(t2);}}
+  const eb=effectiveBand();
+  for(const s of STATIONS){
+    const L=liveMap[s.id];const el=document.createElement('div');
+    el.className='stn'+(L?.live?' live':'')+(!L?.live&&s.talk&&onBand(s)?' talk':'')+(s.locked?' locked':'')+(isDead(s)?' dead':'')+(curSt&&curSt.id===s.id?' cur':'');
+    if(!onBand(s)&&eb!=='all')el.style.opacity=.38;
+    el.style.left=(s.pos*100)+'%';
+    const ri=STATIONS.indexOf(s)%3;
+    el.style.top=['calc(40% + 5px)','calc(58% + 2px)','calc(80% + 5px)'][ri];
+    el.innerHTML=`<div class="c">${s.dl||s.city}</div><div class="s">${L?.live?(L.sport):s.city}</div><span class="lamp"></span>`;
+    el.title=`${s.name} — ${s.lang}`;
+    el.onclick=e=>{e.stopPropagation();manualTo(s);};
+    sc.appendChild(el);
+  }
+  $('quiet').classList.toggle('show',power&&eb==='mixed');
+  $('countLive').textContent=liveGames().length;
+}
+function placeNeedle(){$('needle').style.left=`calc(3% + ${curPos*94}%)`;const a=(curPos*600-300);$('tune').querySelector('.mark').style.transform=`rotate(${a}deg)`;}
+
+/* ============================================================ audio + static */
+let ac,noiseG,noiseSrc;
+function initStatic(){if(ac)return;ac=new (window.AudioContext||window.webkitAudioContext)();const len=ac.sampleRate*2,b=ac.createBuffer(1,len,ac.sampleRate),d=b.getChannelData(0);let last=0;for(let i=0;i<len;i++){const w=Math.random()*2-1;last=(last+.08*w)/1.08;d[i]=(w*.45+last*2.2)*(Math.random()<.002?3:1);}
+  noiseSrc=ac.createBufferSource();noiseSrc.buffer=b;noiseSrc.loop=true;const bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=1800;bp.Q.value=.6;noiseG=ac.createGain();noiseG.gain.value=0;noiseSrc.connect(bp).connect(noiseG).connect(ac.destination);noiseSrc.start();}
+let vol=.8;
+function setStatic(v,t=.25){if(!noiseG)return;noiseG.gain.cancelScheduledValues(ac.currentTime);noiseG.gain.linearRampToValueAtTime(v*vol*.35,ac.currentTime+t);}
+let hlsLib=null,hls=null;
+function loadHlsLib(){return hlsLib?Promise.resolve(hlsLib):new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js';s.onload=()=>{hlsLib=window.Hls;res(hlsLib)};s.onerror=rej;document.head.appendChild(s);});}
+let playToken=0, stallTimer=null;
+async function playStation(s,retried){
+  const tok=++playToken;
+  if(hls){hls.destroy();hls=null;}
+  audio.pause();audio.removeAttribute('src');audio.load();
+  status(`Tuning ${s.name}…`);setEye(15);
+  const url=s.url;
+  try{
+    if(/\.m3u8/.test(url)&&!audio.canPlayType('application/vnd.apple.mpegurl')){
+      const H=await loadHlsLib();if(tok!==playToken)return;hls=new H({liveSyncDurationCount:3});hls.loadSource(url);hls.attachMedia(audio);
+      hls.on(H.Events.ERROR,(e,d)=>{if(d.fatal)fail(s,tok,retried);});
+    }else{audio.src=url;}
+    audio.volume=vol;
+    clearTimeout(stallTimer);stallTimer=setTimeout(()=>{if(tok===playToken&&audio.paused)fail(s,tok,retried);},14000);
+    await audio.play();
+  }catch(e){if(tok===playToken)fail(s,tok,retried);}
+}
+audio.addEventListener('playing',()=>{setStatic(.04,.8);setEye(70+Math.random()*20);status('Receiving.');clearTimeout(stallTimer);});
+audio.addEventListener('waiting',()=>{setStatic(.4,.3);setEye(25);status('Signal fading…');});
+audio.addEventListener('error',()=>{if(curSt)fail(curSt,playToken,false);});
+async function fail(s,tok,retried){
+  if(tok!==playToken)return;
+  if(!retried&&s.uuid){try{const r=await getJSON(`https://de1.api.radio-browser.info/json/stations/byuuid/${s.uuid}`);const u=r?.[0]?.url_resolved;if(u&&u!==s.url&&u.startsWith('https')){s.url=u;return playStation(s,true);}}catch(e){}}
+  dead[s.id]=Date.now()+10*6e4;status(`No signal from ${s.name} (blocked, off-air or geo-restricted). Skipping.`);setEye(5);setStatic(.6);drawScale();
+  if(scanning)setTimeout(()=>tick(true),2500);
+}
+function setEye(deg){$('eye').style.setProperty('--sig',Math.max(4,Math.min(170,deg))+'deg');}
+function status(t){$('oStatus').textContent=t;}
+
+/* ============================================================ tuning motion */
+let anim=null;
+function sweepTo(pos,then){
+  targetPos=pos;if(power)setStatic(.9,.15);audio.volume=0;cancelAnimationFrame(anim);
+  const start=curPos,t0=performance.now(),dur=900+Math.abs(pos-start)*2600;
+  const step=now=>{const k=Math.min(1,(now-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;curPos=start+(pos-start)*e;placeNeedle();setEye(8+Math.random()*25);
+    if(k<1)anim=requestAnimationFrame(step);else{audio.volume=vol;then&&then();}};
+  anim=requestAnimationFrame(step);
+}
+function tuneTo(s){
+  curSt=s;drawScale();showCard(s);
+  sweepTo(s.pos,()=>{if(!power)return;if(s.locked){setStatic(.5);status(s.locked);return;}playStation(s);});
+}
+function manualTo(s){scanning=false;keyState();clearTimeout(dwellTimer);if(s.locked){curSt=s;showCard(s);sweepTo(s.pos);window.open(s.site,'_blank','noopener');return;}tuneTo(s);}
+function dwellFor(s){const L=liveMap[s.id];const r=L?.live?rarity(s,L.sport):0;return (L?.live?50:30)*1000+Math.max(0,r)*6000;}
+function tick(skip){
+  if(!power||!scanning)return;clearTimeout(dwellTimer);
+  const list=scanList();if(!list.length){curSt=null;showCard(null);setStatic(.5);status('Dead band — nothing on air right now.');sweepTo(Math.random());dwellTimer=setTimeout(()=>tick(),60000);return;}
+  const i=curSt?list.findIndex(x=>x.id===curSt.id):-1;const nx=list[(i+1)%list.length];
+  tuneTo(nx);dwellTimer=setTimeout(()=>tick(),dwellFor(nx));
+}
+function step(dir){const list=scanList();if(!list.length)return;const byPos=[...list].sort((a,b)=>a.pos-b.pos);let i=byPos.findIndex(x=>x.pos>curPos+(dir>0?.001:-1));
+  if(dir>0){i=byPos.findIndex(x=>x.pos>curPos+.002);if(i<0)i=0;}else{const r=[...byPos].reverse();const j=r.findIndex(x=>x.pos<curPos-.002);i=j<0?byPos.length-1:byPos.length-1-j;}
+  scanning=false;keyState();clearTimeout(dwellTimer);tuneTo(byPos[i]);}
+
+/* ============================================================ card + log */
+function showCard(s){
+  if(!s){$('oName').textContent='—';$('oMeta').textContent='Between stations';$('oMatch').innerHTML='';$('oDetail').textContent='';$('oNote').textContent='';$('stars').textContent='';return;}
+  const L=liveMap[s.id];
+  $('oName').textContent=`${s.flag} ${s.name}`;
+  $('oMeta').textContent=`${s.city} · ${s.country} · in ${s.lang}`;
+  if(L?.live){
+    $('oMatch').innerHTML=`${L.sport.toUpperCase()} · ${esc(L.league)}<br>${esc(L.title)} <span class="score">${esc(L.score||'')}</span>`;
+    $('oDetail').textContent=(L.detail||'')+(L.count>1?` · ${L.count} fixtures this station may be covering (multiplex)`:'');
+    $('stars').innerHTML=starsFor(rarity(s,L.sport));
+  }else{$('oMatch').innerHTML=s.talk?'SPORTS TALK':'Off the air for sport';$('oDetail').textContent=s.talk?'No live fixture tied to this station right now; general sports programming.':'';$('stars').innerHTML=starsFor(rarity(s,'Sports talk'));}
+  $('oNote').innerHTML=(s.locked?esc(s.locked)+' ':'')+(s.geo?esc(s.geo)+' ':'')+(L?.inferred?'Live status inferred from scheduled start. ':'')+(s.site?`<a href="${s.site}" target="_blank" rel="noopener">Station site ↗</a>`:'');
+}
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function drawLog(){
+  const ul=$('log');ul.innerHTML='';
+  if(logTab==='now'){
+    const ls=liveGames().sort((a,b)=>rarity(b,liveMap[b.id].sport)-rarity(a,liveMap[a.id].sport));
+    if(!ls.length){ul.innerHTML='<li class="empty">No tracked fixtures in progress. Sports talk fills the band.</li>';}
+    ls.forEach(s=>{const L=liveMap[s.id];const li=document.createElement('li');if(s.locked)li.className='lk';
+      li.innerHTML=`<span class="t">${esc(L.score||'LIVE')}</span><span>${s.flag} <b>${esc(L.title)}</b><br><span class="w">${esc(L.sport)} · ${esc(s.name)} · ${esc(s.lang)}${s.locked?' · Japan only':''}</span></span>`;
+      li.onclick=()=>manualTo(s);ul.appendChild(li);});
+  }else{
+    const seen=new Set();const up=upcoming.filter(u=>{const k=u.t.getTime()+u.title;if(seen.has(k))return false;seen.add(k);return true;}).slice(0,25);
+    if(!up.length)ul.innerHTML='<li class="empty">Nothing scheduled in the next few hours on tracked stations.</li>';
+    up.forEach(u=>{const li=document.createElement('li');li.className='lk';const near=u.t-Date.now()>864e5?u.t.toLocaleDateString([], {month:'short',day:'numeric'}):fmtT(u.t);
+      li.innerHTML=`<span class="t">${near}</span><span>${u.st.flag} <b>${esc(u.title)}</b><br><span class="w">${esc(u.sport)} · ${esc(u.st.name)} · ${esc(u.st.lang)}</span></span>`;ul.appendChild(li);});
+  }
+  $('upd').textContent='upd '+fmtT(new Date());
+}
+document.querySelectorAll('.tabs span').forEach(t=>t.onclick=()=>{logTab=t.dataset.t;document.querySelectorAll('.tabs span').forEach(x=>x.classList.toggle('sel',x===t));drawLog();});
+
+/* ============================================================ controls */
+function keyState(){$('kScan').classList.toggle('down',power&&scanning);$('kLock').classList.toggle('down',power&&!scanning);$('kPower').classList.toggle('down',power);}
+$('kPower').onclick=()=>{
+  power=!power;$('cab').classList.toggle('on',power);
+  if(power){initStatic();ac.resume();setStatic(.6,.6);$('oName').textContent='Warming up…';$('oMeta').textContent='';scanning=true;keyState();setTimeout(()=>{refresh().then(()=>tick())},900);}
+  else{clearTimeout(dwellTimer);playToken++;if(hls){hls.destroy();hls=null;}audio.pause();setStatic(0,.2);curSt=null;$('oName').textContent='Receiver off';$('oMeta').textContent='Press power to warm the valves';$('oMatch').innerHTML='';$('oDetail').textContent='';$('oNote').textContent='';status('');keyState();drawScale();}
+};
+$('kScan').onclick=()=>{if(!power)return;scanning=true;keyState();tick();};
+$('kLock').onclick=()=>{if(!power)return;scanning=false;keyState();clearTimeout(dwellTimer);status('Locked on this station.');};
+$('kNext').onclick=()=>power&&step(1);$('kPrev').onclick=()=>power&&step(-1);
+document.querySelectorAll('#bandsel button').forEach(b=>b.onclick=()=>{band=b.dataset.b;document.querySelectorAll('#bandsel button').forEach(x=>x.classList.toggle('sel',x===b));drawScale();drawLog();if(power&&scanning)tick();});
+// drag the dial / tuning knob
+function nearest(pos){let best=null,bd=1;for(const s of STATIONS){const d=Math.abs(s.pos-pos);if(d<bd){bd=d;best=s;}}return bd<.018?best:null;}
+function dragTune(el,toPos){
+  let active=false,lastAngle=0;
+  el.addEventListener('pointerdown',e=>{if(!power)return;active=true;el.setPointerCapture(e.pointerId);scanning=false;keyState();clearTimeout(dwellTimer);cancelAnimationFrame(anim);playToken++;audio.pause();setStatic(.85,.1);lastAngle=null;move(e);});
+  const move=e=>{if(!active)return;curPos=Math.max(0,Math.min(1,toPos(e)));placeNeedle();const n=nearest(curPos);setEye(n?60:8+Math.random()*12);setStatic(n?.25:.85,.08);};
+  el.addEventListener('pointermove',move);
+  el.addEventListener('pointerup',()=>{if(!active)return;active=false;const n=nearest(curPos);if(n){if(n.locked){manualTo(n);}else tuneTo(n);}else{curSt=null;showCard(null);drawScale();status('Between stations.');}});
+}
+dragTune($('dial'),e=>{const r=$('dial').getBoundingClientRect();return ((e.clientX-r.left)/r.width-.03)/.94;});
+(function(){const k=$('tune');let a0=null,p0=0;dragTune(k,e=>{const r=k.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;const a=Math.atan2(e.clientY-cy,e.clientX-cx);if(a0===null||e.type==='pointerdown'){a0=a;p0=curPos;}let d=a-a0;if(d>Math.PI)d-=2*Math.PI;if(d<-Math.PI)d+=2*Math.PI;a0=a;p0=p0+d/(Math.PI*4);return p0;});k.addEventListener('pointerdown',()=>{a0=null;},true);})();
+(function(){const k=$('vol');let a0=null;const mk=k.querySelector('.mark');const draw=()=>mk.style.transform=`rotate(${vol*270-135}deg)`;draw();
+  k.addEventListener('pointerdown',e=>{k.setPointerCapture(e.pointerId);a0=null;});
+  k.addEventListener('pointermove',e=>{if(!e.buttons&&e.pointerType==='mouse')return;if(!k.hasPointerCapture(e.pointerId))return;const r=k.getBoundingClientRect();const a=Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2));if(a0===null){a0=a;return;}let d=a-a0;if(d>Math.PI)d-=2*Math.PI;if(d<-Math.PI)d+=2*Math.PI;a0=a;vol=Math.max(0,Math.min(1,vol+d/(Math.PI*1.5)));audio.volume=vol;draw();});
+  k.addEventListener('wheel',e=>{e.preventDefault();vol=Math.max(0,Math.min(1,vol-e.deltaY/800));audio.volume=vol;draw();},{passive:false});})();
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);if(e.key===' '){e.preventDefault();$('kPower').click();}if(e.key==='s')$('kScan').click();});
+
+/* ============================================================ loop */
+let lastTSDB=0;
+async function refresh(){
+  const jobs=[pollESPN(),pollSR()];if(Date.now()-lastTSDB>10*6e4){lastTSDB=Date.now();jobs.push(pollTSDB());}
+  await Promise.all(jobs);resolve();drawScale();drawLog();if(curSt){const s=STATIONS.find(x=>x.id===curSt.id);if(s)showCard(s);}
+}
+setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});},1000);
+setInterval(refresh,90000);
+drawScale();placeNeedle();refresh();
+</script>
+</body>
+</html>
