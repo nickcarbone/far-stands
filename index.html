@@ -56,6 +56,8 @@ body{padding:clamp(10px,3vw,40px);padding-bottom:max(24px,env(safe-area-inset-bo
 @keyframes mq{to{transform:translateX(-100%)}}
 .bar{position:relative;height:18px;margin-top:10px}
 .bar .seg{position:absolute;top:6px;width:2px;height:6px;background:var(--vfd-dim)}
+.bar .seg.obs{background:rgba(255,178,62,.35)}
+.bar .seg.obs.now{background:var(--amber);height:10px;top:4px;box-shadow:0 0 6px rgba(255,178,62,.7)}
 .bar .seg.talk{background:rgba(98,243,220,.45);height:6px}
 .bar .seg.live{background:var(--vfd);height:12px;top:3px;box-shadow:var(--vfd-glow)}
 .bar .cur{position:absolute;top:0;width:3px;height:18px;margin-left:-1px;background:var(--amber);box-shadow:0 0 8px rgba(255,178,62,.8);transition:left .9s cubic-bezier(.6,.05,.3,1)}
@@ -93,6 +95,9 @@ body{padding:clamp(10px,3vw,40px);padding-bottom:max(24px,env(safe-area-inset-bo
 .it .led{width:8px;height:8px;border-radius:50%;background:#3a3e45}
 .it.live .led{background:var(--vfd);box-shadow:0 0 8px var(--vfd)}
 .it.talk .led{background:#5a8f86}
+.it.obs .led{background:#6b5530}
+.it.obs.now .led{background:var(--amber);box-shadow:0 0 8px var(--amber)}
+.it.obs .r{color:var(--amber)}
 .it.next .led{background:transparent;border:1px solid #555}
 .it .t1{font-size:14px;font-weight:600;color:#eef1f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .it .t2{font-size:12px;color:var(--mute);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -119,7 +124,7 @@ body{padding:clamp(10px,3vw,40px);padding-bottom:max(24px,env(safe-area-inset-bo
     <div class="row">
       <div class="vfd" id="vfd">
         <div class="ind" id="ind">
-          <span id="iLive">LIVE</span><span id="iTalk">TALK</span><span id="iAuto">AUTO</span><span id="iTune">TUNED</span><span class="sp"></span><span id="iSig">▮▮▮▮▮</span><span class="on" id="iClock">--:--</span>
+          <span id="iLive">LIVE</span><span id="iTalk">TALK</span><span id="iRare">RARE</span><span id="iAuto">AUTO</span><span id="iTune">TUNED</span><span class="sp"></span><span id="iSig">▮▮▮▮▮</span><span class="on" id="iClock">--:--</span>
         </div>
         <div class="main">
           <div class="freq lit"><span class="ghost">8888</span><span id="fq">----</span><span class="unitk">KHZ</span></div>
@@ -139,11 +144,12 @@ body{padding:clamp(10px,3vw,40px);padding-bottom:max(24px,env(safe-area-inset-bo
   <div class="guide">
     <div class="ghead"><h2>Programme guide</h2><span class="hint" id="hint">Tap any station to listen. Tap the knob to go back to auto-scan.</span></div>
     <div class="sec">Live games</div><div class="items" id="gLive"></div>
+    <div class="sec">Obscure sports</div><div class="items" id="gObs"></div>
     <div class="sec">Sports talk</div><div class="items" id="gTalk"></div>
     <div class="sec">Next up</div><div class="items" id="gNext"></div>
   </div>
   <div class="foot">
-    Fixtures: ESPN public scoreboards, TheSportsDB (free tier) and the Sveriges Radio open API. A live light means a fixture this station carries is in progress; national stations often switch between several matches, so it doesn't guarantee commentary on that exact game. Some broadcasters block live sport outside their country; dead stations are skipped for ten minutes. Streams resolved via <a href="https://www.radio-browser.info" target="_blank" rel="noopener">radio-browser.info</a>. Use your device volume.
+    Fixtures: ESPN public scoreboards, TheSportsDB (free tier) and the Sveriges Radio open API. A live light means a fixture this station carries is in progress; national stations often switch between several matches, so it doesn't guarantee commentary on that exact game. Some broadcasters block live sport outside their country; dead stations are skipped for ten minutes. Streams resolved via <a href="https://www.radio-browser.info" target="_blank" rel="noopener">radio-browser.info</a>. Obscure sports lists stations that regularly carry niche sport; “usually on now” comes from each station’s typical broadcast pattern, not a published schedule. Use your device volume.
   </div>
 </div>
 <audio id="audio" preload="none" playsinline></audio>
@@ -192,9 +198,42 @@ const STATIONS=[
  {id:'nhk',city:'Tokyo',dl:'NHK',name:'NHK Radio 1 · Ōzumō',country:'Japan',flag:'🇯🇵',lang:'Japanese',pos:0.982,row:1,locked:'Japan-only stream (らじる★らじる is geo-restricted). Tap to open NHK’s player.',site:'https://www.nhk.or.jp/radio/',sportW:10,
    cal:{sport:'Sumo',league:'Grand Sumo Tournament',
      /* [first day, last day] local JST; R1 carries the makuuchi division ~15:45–18:00 JST. Add later basho as the Sumo Association confirms them. */
-     basho:[['2027-01-10','2027-01-24','Hatsu basho · Ryōgoku Kokugikan']],from:'15:45',to:'18:00'}}
+     basho:[['2027-01-10','2027-01-24','Hatsu basho · Ryōgoku Kokugikan']],from:'15:45',to:'18:00'}},
+ /* ---------- Obscure sports: stations that regularly carry niche sport. No fixture feed; 'pattern' is the
+    usual broadcast window in local time, used only to flag "usually on now". Days: 0=Sun … 6=Sat. ---------- */
+ {id:'rnag',city:'Casla, Conamara',dl:'RnaG',name:'RTÉ Raidió na Gaeltachta',country:'Ireland',flag:'🇮🇪',lang:'Irish',pos:.6225,
+  url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RTE_RAIDIO_NA_GAELTACHTA.mp3',uuid:'711a5e4a-34ab-444c-987f-5ba36be14a91',site:'https://www.rte.ie/radio/rnag/',
+  obscure:{sport:'Gaelic games',cover:'Hurling and Gaelic football commentary in Irish; holds the Irish-language rights to every All-Ireland Championship match',
+   when:'Weekends: Spórt an tSathairn (Sat afternoon) and Spórt an Lae (Sun); Championship April–July, club games through the winter',
+   tz:'Europe/Dublin',win:[{d:[6],f:'14:00',t:'21:30'},{d:[0],f:'13:00',t:'19:00'}]}},
+ {id:'kerry',city:'Tralee',dl:'Kerry',name:'Radio Kerry · Weekend Sport',country:'Ireland',flag:'🇮🇪',lang:'English',pos:.6425,
+  url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_KERRY_SC',uuid:'c69f8645-06e8-49b8-ab05-3d53ecbce027',site:'https://www.radiokerry.ie/sport',
+  obscure:{sport:'Gaelic football',cover:'Live commentary on Kerry inter-county and Kerry club games, county finals included',
+   when:'Weekend Sport, Saturday and Sunday afternoons, year-round',tz:'Europe/Dublin',win:[{d:[6],f:'14:00',t:'19:00'},{d:[0],f:'13:00',t:'19:00'}]}},
+ {id:'tipp',city:'Clonmel',dl:'Tipp',name:'Tipp FM',country:'Ireland',flag:'🇮🇪',lang:'English',pos:.6575,
+  url:'https://playerservices.streamtheworld.com/api/livestream-redirect/TIPP_FM.mp3',uuid:'dc799d91-c6d6-4c8d-87c1-3e06e87c50df',site:'https://www.tippfm.com',
+  obscure:{sport:'Hurling',cover:'Commentary on Tipperary hurling and football, from minor level up',
+   when:'Weekend afternoons; inter-county season January–July',tz:'Europe/Dublin',win:[{d:[6],f:'14:00',t:'19:00'},{d:[0],f:'13:00',t:'19:00'}]}},
+ {id:'ras2',city:'Reykjavík',dl:'Rás 2',name:'RÚV Rás 2',country:'Iceland',flag:'🇮🇸',lang:'Icelandic',pos:.0175,
+  url:'https://ruv-radio-live.akamaized.net/streymi/ras2/ras2/ras2.m3u8',uuid:'6c775ddd-84cb-40ae-bee2-18547849f200',site:'https://www.ruv.is/utvarp/beint/ras-2',
+  obscure:{sport:'Handball',cover:'Radio commentary on Iceland’s national handball teams at major tournaments',
+   when:'Men’s championships in January, women’s in December; evening matches',tz:'Atlantic/Reykjavik',months:[1,12],win:[{d:[0,1,2,3,4,5,6],f:'14:00',t:'21:30'}]}},
+ {id:'yle',city:'Helsinki',dl:'Yle RS',name:'Yle Radio Suomi',country:'Finland',flag:'🇫🇮',lang:'Finnish',pos:.4975,
+  url:'https://icecast.live.yle.fi/radio/YleRS/icecast.audio',uuid:'0fbf6ebe-052e-4799-a244-525b7cfffcac',site:'https://areena.yle.fi/podcastit/ohjelmat/yle-radio-suomi',
+  obscure:{sport:'Pesäpallo',cover:'Finnish sport, including pesäpallo (Finnish baseball) and the Urheiluilta sports evening; Superpesis finals have been carried as radio broadcasts',
+   when:'Pesäpallo season May–September, evening games',tz:'Europe/Helsinki',months:[5,6,7,8,9],win:[{d:[0,1,2,3,4,5,6],f:'17:30',t:'21:30'}]}},
+ {id:'rebelde',city:'La Habana',dl:'Rebelde',name:'Radio Rebelde',country:'Cuba',flag:'🇨🇺',lang:'Spanish',pos:.7225,
+  url:'https://securestreams7.autopo.st/?uri=https://icecast.teveo.cu/kHKL7tWd',uuid:'98920fee-500c-49c8-a973-ff4179967f50',site:'https://www.radiorebelde.cu',
+  obscure:{sport:'Cuban baseball',cover:'Play-by-play of Cuba’s Serie Nacional and the national team',
+   when:'65th Serie Nacional runs 4 October – 22 December 2026; afternoon and evening games, Havana time',tz:'America/Havana',
+   range:['2026-10-04','2026-12-22'],win:[{d:[0,1,2,3,4,5,6],f:'13:00',t:'22:30'}],note:'Plays via a third-party relay; Cuban servers may not answer directly.'}},
+ {id:'airgold',city:'New Delhi',dl:'AIR',name:'Akashvani · AIR FM Rainbow Delhi',country:'India',flag:'🇮🇳',lang:'Hindi / English',pos:.9675,
+  url:'https://d3r9rhourdc02u.cloudfront.net/assets/radio/airdelhi02/air002_Auto.m3u8',uuid:'2a2132d9-3c72-4c11-a49f-ced18a9e2432',site:'https://newsonair.gov.in',
+  obscure:{sport:'Cricket',cover:'Ball-by-ball cricket commentary in Hindi and English, carried across AIR networks including FM Rainbow, when India play at home or at ICC events',
+   when:'No fixed pattern; on air when India play',tz:'Asia/Kolkata',win:[]}},
+
 ];
-const SPORT_W={'Football':3,'Soccer':3,'Ice hockey':7,'Bandy':10,'Handball':8,'Floorball':9,'Biathlon':9,'Cross-country skiing':9,'Alpine skiing':7,'Aussie rules':8,'Rugby league':6,'Rugby union':5,'Rugby':5,'Sumo':10,'Basketball':4,'Speedway':9,'Harness racing':9,'Athletics':5,'Volleyball':6,'Sports talk':2,'Live sport':8};
+const SPORT_W={'Football':3,'Soccer':3,'Ice hockey':7,'Bandy':10,'Handball':8,'Floorball':9,'Biathlon':9,'Cross-country skiing':9,'Alpine skiing':7,'Aussie rules':8,'Rugby league':6,'Rugby union':5,'Rugby':5,'Sumo':10,'Basketball':4,'Speedway':9,'Harness racing':9,'Athletics':5,'Volleyball':6,'Sports talk':2,'Live sport':8,'Gaelic games':10,'Gaelic football':10,'Hurling':10,'Pesäpallo':10,'Cuban baseball':8,'Cricket':6};
 const ESPN_SPORT={'soccer':'Football','australian-football':'Aussie rules','rugby-league':'Rugby league','rugby':'Rugby union','hockey':'Ice hockey'};
 const LANG_B={English:-4,Spanish:0,Portuguese:0,French:0,German:0,Italian:0};
 function rarity(st,sport){const sw=st.sportW&&!sport?st.sportW:(SPORT_W[sport]??4);const lb=LANG_B[st.lang]??2;return sw+lb;}
@@ -312,13 +351,19 @@ const fmtT=d=>d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
 function inWords(t){const m=Math.round((t-Date.now())/6e4);if(m<1)return 'starting';if(m<60)return `in ${m} min`;const h=Math.floor(m/60),r=m%60;if(h<24)return `in ${h}h${r?` ${String(r).padStart(2,'0')}m`:''}`;return t.toLocaleDateString([], {weekday:'short'})+' '+fmtT(t);}
 
 /* ============================================================ the tuning order */
+const WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function localParts(tz){const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+  return{ymd:`${p.year}-${p.month}-${p.day}`,m:+p.month,wd:WD.indexOf(p.weekday),hm:`${p.hour==='24'?'00':p.hour}:${p.minute}`};}
+function inSeason(s){const o=s.obscure;if(!o)return false;const L=localParts(o.tz);if(o.months&&!o.months.includes(L.m))return false;if(o.range&&(L.ymd<o.range[0]||L.ymd>o.range[1]))return false;return true;}
+function usualNow(s){const o=s.obscure;if(!o||!o.win.length||!inSeason(s))return false;const L=localParts(o.tz);return o.win.some(w=>w.d.includes(L.wd)&&L.hm>=w.f&&L.hm<w.t);}
+function obscureList(){return STATIONS.filter(s=>s.obscure).sort((a,b)=>(usualNow(b)-usualNow(a))||(inSeason(b)-inSeason(a))||(rarity(b,b.obscure.sport)-rarity(a,a.obscure.sport)));}
 function isDead(s){return dead[s.id]&&dead[s.id]>Date.now();}
 const playable=s=>!s.locked&&!isDead(s)&&s.url;
 function liveList(){return STATIONS.filter(s=>liveMap[s.id]?.live).sort((a,b)=>rarity(b,liveMap[b.id].sport)-rarity(a,liveMap[a.id].sport));}
 function talkList(){return STATIONS.filter(s=>s.talk&&!liveMap[s.id]?.live).sort((a,b)=>rarity(b,'Sports talk')-rarity(a,'Sports talk'));}
 /* Auto-scan: live games if there are any to hear; otherwise sports talk. The knob steps through games, then talk. */
-function scanList(){const g=liveList().filter(playable);return g.length?g:talkList().filter(playable);}
-function knobList(){return [...liveList(),...talkList()].filter(playable);}
+function scanList(){const g=liveList().filter(playable);if(g.length)return g;const o=obscureList().filter(s=>usualNow(s)&&playable(s));return o.length?o:talkList().filter(playable);}
+function knobList(){const ob=obscureList().filter(s=>!liveMap[s.id]?.live);return [...liveList(),...ob.filter(usualNow),...talkList(),...ob.filter(s=>!usualNow(s))].filter(playable);}
 
 /* ============================================================ display */
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -328,7 +373,8 @@ function nextLine(){const n=upcoming[0];return n?`next: ${n.title} · ${n.sts[0]
 function showDisplay(){
   const nLive=liveList().length;
   $('iLive').classList.toggle('on',!!(curSt&&liveMap[curSt.id]?.live));
-  $('iTalk').classList.toggle('on',!!(curSt&&!liveMap[curSt.id]?.live));
+  $('iTalk').classList.toggle('on',!!(curSt&&!liveMap[curSt.id]?.live&&!curSt.obscure));
+  $('iRare').classList.toggle('on',!!(curSt&&curSt.obscure));$('iRare').classList.toggle('amb',true);
   $('iAuto').classList.toggle('on',auto);$('iAuto').classList.toggle('amb',false);
   $('kcap').classList.toggle('auto',auto&&power);$('kcap').textContent=auto?'AUTO':'HOLD';
   if(!curSt){$('fq').textContent='----';$('dStn').textContent=power?'Searching':'—';$('dSub').textContent='';setMarquee(power?(nLive?'':'no games on air · '+nextLine()):'');drawBar();return;}
@@ -338,13 +384,14 @@ function showDisplay(){
   $('dSub').textContent=`${curSt.city} · ${curSt.country} · ${curSt.lang}`;
   let m;
   if(L?.live){m=`${L.sport} · ${L.league} · ${L.title}${L.score?' '+L.score:''}${L.detail?' · '+L.detail:''}${L.count>1?` · +${L.count-1} more on this station`:''}`;}
+  else if(curSt.obscure){const o=curSt.obscure;m=`${o.sport} · ${usualNow(curSt)?'usually on air about now':(inSeason(curSt)&&o.win.length?'outside its usual hours':o.win.length?'out of season':'on air when it happens')} · ${o.when} · ${o.cover}${o.note?' · '+o.note:''}`;}
   else{m=`sports talk${nLive?'':' · no games on air right now · '+nextLine()}`;}
   if(curSt.geo)m+=' · '+curSt.geo;
   setMarquee(m);drawBar();
 }
 function drawBar(){
   const bar=$('bar');bar.querySelectorAll('.seg').forEach(x=>x.remove());
-  for(const s of STATIONS){const d=document.createElement('div');d.className='seg'+(liveMap[s.id]?.live?' live':s.talk?' talk':'');d.style.left=(s.pos*100)+'%';bar.appendChild(d);}
+  for(const s of STATIONS){const d=document.createElement('div');d.className='seg'+(liveMap[s.id]?.live?' live':s.obscure?(' obs'+(usualNow(s)?' now':'')):s.talk?' talk':'');d.style.left=(s.pos*100)+'%';bar.appendChild(d);}
   $('cur').style.left=((curSt?curSt.pos:0)*100)+'%';
 }
 function setSig(n){$('iSig').textContent='▮'.repeat(n)+'▯'.repeat(5-n);$('iSig').classList.toggle('on',n>0);$('iTune').classList.toggle('on',n>=3);}
@@ -353,10 +400,13 @@ function setSig(n){$('iSig').textContent='▮'.repeat(n)+'▯'.repeat(5-n);$('iS
 function item(s,cls,r1,t1,t2,click){const d=document.createElement('div');d.className=`it ${cls}`+(curSt&&s&&curSt.id===s.id?' cur':'')+(s&&isDead(s)?' dead':'');
   d.innerHTML=`<span class="led"></span><div style="min-width:0"><div class="t1">${t1}</div><div class="t2">${t2}</div></div><div class="r">${r1}</div>`;if(click)d.onclick=click;else d.classList.add('lk');return d;}
 function drawGuide(){
-  const gl=$('gLive'),gt=$('gTalk'),gn=$('gNext');gl.innerHTML=gt.innerHTML=gn.innerHTML='';
+  const gl=$('gLive'),gt=$('gTalk'),gn=$('gNext'),go=$('gObs');gl.innerHTML=gt.innerHTML=gn.innerHTML=go.innerHTML='';
   const L=liveList();
   if(!L.length)gl.innerHTML=`<div class="empty">No tracked games are on air right now.${upcoming[0]?` The next one is ${esc(upcoming[0].title)}, ${inWords(upcoming[0].t)}. Sports talk is playing until then.`:''}</div>`;
   L.forEach(s=>{const x=liveMap[s.id];gl.appendChild(item(s,'live',esc(x.score||'LIVE'),`${s.flag} ${esc(x.title)}`,`${esc(x.sport)} · ${esc(s.name)} · ${esc(s.lang)}${s.locked?' · only plays in Japan':''}${isDead(s)?' · no signal':''}`,()=>pick(s)));});
+  obscureList().forEach(s=>{const o=s.obscure,now=usualNow(s),ins=inSeason(s);
+    const tag=now?'USUALLY ON':(o.win.length?(ins?'OFF HOURS':'OFF SEASON'):'WHEN INDIA PLAY');
+    const el=item(s,'obs'+(now?' now':''),tag,`${s.flag} ${esc(o.sport)} · ${esc(s.name)}`,`${esc(o.when)} · ${esc(s.lang)}${isDead(s)?' · no signal':''}`,()=>pick(s));el.title=o.cover;go.appendChild(el);});
   talkList().forEach(s=>gt.appendChild(item(s,'talk',kHz(s),`${s.flag} ${esc(s.name)}`,`${esc(s.city)} · ${esc(s.lang)}${isDead(s)?' · no signal':''}`,()=>pick(s))));
   const up=[...upcoming.filter(u=>u.sport!=='Football').slice(0,8),...upcoming.filter(u=>u.sport==='Football').slice(0,10)].sort((a,b)=>a.t-b.t);
   if(!up.length)gn.innerHTML='<div class="empty">Nothing scheduled on tracked stations in the next day.</div>';
@@ -377,7 +427,7 @@ async function playStation(s,retried){
   audio.pause();audio.removeAttribute('src');audio.load();setSig(1);setStatic(.7,.1);
   try{
     if(/\.m3u8/.test(s.url)&&!audio.canPlayType('application/vnd.apple.mpegurl')){
-      const H=await loadHlsLib();if(tok!==playToken)return;hls=new H({liveSyncDurationCount:3});hls.loadSource(s.url);hls.attachMedia(audio);
+      const H=await loadHlsLib();if(tok!==playToken)return;hls=new H({liveSyncDurationCount:3,fragLoadingMaxRetry:6,levelLoadingMaxRetry:6,manifestLoadingMaxRetry:4});hls.loadSource(s.url);hls.attachMedia(audio);
       hls.on(H.Events.ERROR,(e,d)=>{if(d.fatal)fail(s,tok,retried);});
     }else audio.src=s.url;
     clearTimeout(stallTimer);stallTimer=setTimeout(()=>{if(tok===playToken&&audio.paused)fail(s,tok,retried);},14000);
@@ -462,11 +512,11 @@ async function refresh(){
   if(curSt){curSt=STATIONS.find(x=>x.id===curSt.id)||curSt;}
   showDisplay();drawGuide();
   // if auto is parked on talk and a game has started, move to it
-  if(power&&auto&&curSt&&!liveMap[curSt.id]?.live&&liveList().some(playable))tick();
+  if(power&&auto&&curSt&&!liveMap[curSt.id]?.live&&(liveList().some(playable)||(!usualNow(curSt)&&obscureList().some(s=>usualNow(s)&&playable(s)))))tick();
 }
 setInterval(()=>{$('iClock').textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});},1000);
 setInterval(refresh,90000);
-setInterval(()=>{if(upcoming.length)drawGuide();},60000);
+setInterval(()=>{drawGuide();drawBar();},60000);
 showDisplay();refresh();
 </script>
 </body>
